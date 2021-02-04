@@ -5,7 +5,7 @@ import {
     GET_ALL_PRODUCT,
     SELECT_PRODUCT
 } from "./ActionType";
-import {IProduct} from "../../common/interface/Product";
+import {IProduct} from "../../interface/Product";
 
 // Interface for productReducer
 export interface IProductReducerState {

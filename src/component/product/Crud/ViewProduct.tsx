@@ -1,8 +1,8 @@
 import * as React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { IRootReducer } from "../../../reducers";
+import { IRootReducer } from "../../../store/reducers";
 import { useState } from "react";
-import { selectProduct } from "../../../actions/ProductActions";
+import { selectProduct } from "../../../store/actions/ProductActions";
 import { NavLink, useParams } from "react-router-dom";
 import "./Product.css"
 

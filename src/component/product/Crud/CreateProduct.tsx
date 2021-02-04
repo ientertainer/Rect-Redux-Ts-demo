@@ -1,9 +1,9 @@
 import * as React from "react"
 import {NavLink, useHistory} from "react-router-dom";
 import {useDispatch, useSelector} from 'react-redux';
-import {createNewProduct, editProduct} from "../../../actions/ProductActions";
-import {IRootReducer} from "../../../reducers";
-import {selectProduct} from "../../../actions/ProductActions";
+import {createNewProduct, editProduct} from "../../../store/actions/ProductActions";
+import {IRootReducer} from "../../../store/reducers";
+import {selectProduct} from "../../../store/actions/ProductActions";
 
 const CreateProduct = () => {
     // Handle state for Product name

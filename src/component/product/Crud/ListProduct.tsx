@@ -1,8 +1,9 @@
 import * as React from "react";
 import { useHistory } from "react-router-dom";
-import { IProduct } from "../../../common/interface/Product";
+import { IProduct } from "../../../store/interface/Product";
 import { useDispatch } from "react-redux";
-import { deleteProduct, selectProduct } from "../../../actions/ProductActions";
+import { deleteProduct, selectProduct } from "../../../store/actions/ProductActions";
+import Card from "../../Card/Card";
 
 // Register all props of component here
 interface IProductListProps {
@@ -51,7 +52,7 @@ const ListProduct = (props: IProductListProps) => {
     };
 
     return (
-        <div>
+        <Card>
             <h1>List of Product</h1>
             <button onClick={ createProduct }>Create Product</button>
             <table>
@@ -91,7 +92,7 @@ const ListProduct = (props: IProductListProps) => {
                 }
                 </tbody>
             </table>
-        </div>
+        </Card>
     );
 }
 

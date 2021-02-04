@@ -4,7 +4,7 @@ import {
     EDIT_PRODUCT,
     SELECT_PRODUCT
 }   from "../reducers/Product/ActionType";
-import {IProduct} from "../common/interface/Product";
+import {IProduct} from "../interface/Product";
 import {IAction} from "../reducers/Product/Productreducers";
 
 /**
@@ -33,10 +33,10 @@ export const deleteProduct= (productId: number): IAction => {
  * Edit product based on productId
  * @param productId
  */
-export const editProduct = (productId: IProduct): IAction => {
+export const editProduct = (product: IProduct): IAction => {
     return {
         type: EDIT_PRODUCT,
-        payload: productId
+        payload: product
     }
 };
 

@@ -1,7 +1,7 @@
 import * as React from "react";
 import ListProduct from "./Crud/ListProduct";
 import {useSelector} from 'react-redux'
-import {IRootReducer} from "../../reducers";
+import {IRootReducer} from "../../store/reducers";
 const Products = () => {
     // State of product reducer
     const productReducer = useSelector( (state: IRootReducer) => state.productReducer);
