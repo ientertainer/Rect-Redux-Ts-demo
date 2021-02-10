@@ -3,9 +3,9 @@ import {
     DELETE_PRODUCT,
     EDIT_PRODUCT,
     SELECT_PRODUCT
-}   from "../reducers/Product/ActionType";
-import {IProduct} from "../interface/Product";
-import {IAction} from "../reducers/Product/Productreducers";
+}   from "../actionTypes/ProductActionType";
+import {IProduct} from "../interface/ProductReducerInterface";
+import {IAction} from "../../common/interface/redux/ActionInterface";
 
 /**
  * Create new product action

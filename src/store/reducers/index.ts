@@ -1,10 +1,11 @@
 import { combineReducers } from 'redux';
-import productReducer, {IProductReducerState} from './Product/Productreducers';
+import { IProductReducer } from '../interface/ProductReducerInterface';
+import productReducer from "./Product/ProductReducer";
 
 // Register all reducer
 export interface IRootReducer {
     // Product reducer state
-    productReducer: IProductReducerState
+    productReducer: IProductReducer
 }
 
 export default combineReducers({

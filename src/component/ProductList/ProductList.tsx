@@ -1,11 +1,11 @@
 import * as React from "react";
 import { useHistory } from "react-router-dom";
-import { IProduct } from "../../store/interface/Product";
-import {useDispatch, useSelector} from "react-redux";
-import {createNewProduct, deleteProduct, editProduct, selectProduct} from "../../store/actions/ProductActions";
+import { IProduct } from "../../store/interface/ProductReducerInterface";
+import { useDispatch, useSelector } from "react-redux";
+import { createNewProduct, deleteProduct, editProduct } from "../../store/actions/ProductActions";
 import Card from "../Card/Card";
 import './ProductListStyle.css'
-import {IRootReducer} from "../../store/reducers";
+import { IRootReducer } from "../../store/reducers";
 import Button from "../Button/Button";
 import {
     Table,
@@ -14,9 +14,9 @@ import {
     TableContainer,
     TableHead,
     TableRow,
-    Paper, Modal, TextField, FormControl
+    Paper, Modal, TextField, FormControl, Grid, Typography
 } from '@material-ui/core'
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 // Register all props of component here
 interface IProductListProps {
@@ -33,27 +33,17 @@ const ProductList = (props: IProductListProps) => {
 
     // useHistory routing hook to push new rout
     const history = useHistory();
+    const path = history.location.pathname.split('/')
 
     const [ modalVisible, setModalVisible ] = useState(false);
     const [ selectedProduct, setSelectedProduct ] = useState<IProduct | any>(null);
     const [ selectedAction, setSelectedAction ] = useState<any>(null);
 
-    /**
-     * Delete product based on productId
-     * @param productId
-     */
-    const onDelete = (productId: number) => {
-
-    };
-
-    /**
-     * Select product based on productId
-     * @param productId
-     */
-    const onEdit = (productId: number) => {
-        dispatch(selectProduct(productId));
-        history.push("/create");
-    };
+    useEffect(() => {
+        if (path[path.length - 1] === 'new') {
+            createProduct()
+        }
+    }, []);
 
     /**
      * create new product
@@ -69,14 +59,6 @@ const ProductList = (props: IProductListProps) => {
         }
         setSelectedProduct(create);
         setModalVisible(true);
-    };
-
-    /**
-     * View Product Details
-     * @param productId
-     */
-    const onView = (productId: number) => {
-        history.push(`/view/${productId}`);
     };
 
     const productAction = (action: string, productData: IProduct) => {
@@ -164,8 +146,8 @@ const ProductList = (props: IProductListProps) => {
                                                     />
                                                     <Button
                                                         label={'View'}
-                                                        // onClick={() => productAction('view', product)}
-                                                        onClick={() => onView(product.id)}
+                                                        onClick={() => productAction('view', product)}
+                                                        // onClick={() => onView(product.id)}
                                                         size={'small'}
                                                         variant={'outlined'}
                                                         color={'primary'}
@@ -202,9 +184,9 @@ const ProductList = (props: IProductListProps) => {
                     borderRadius: 10,
                     padding: '10px 20px',
                 }}>
-                    <h2>{selectedAction === 'edit' ? 'Edit' : 'Delete'} Product</h2>
+                    <h2>{selectedAction === 'edit' ? 'Edit' : selectedAction === 'delete' ? 'Delete' : selectedAction === 'create' ? 'Create' : 'View' } Product</h2>
                     {selectedAction === 'delete' && 'Are you sure to delete selected product?'}
-                    {selectedAction === 'edit' && <>
+                    {(selectedAction === 'edit' || selectedAction === 'create') && <>
                         <FormControl fullWidth={true} margin={'dense'}>
                             <TextField
                                 label="Product Name"
@@ -239,18 +221,48 @@ const ProductList = (props: IProductListProps) => {
                             />
                         </FormControl>
                     </>}
+                    {selectedAction === 'view' && <>
+                        <Grid container spacing={3}>
+                            <Grid item xs={6}>
+                                <Typography variant="h6" component="h2">
+                                    ID : {selectedProduct.id}
+                                </Typography>
+                            </Grid>
+                            <Grid item xs={6}>
+                                <Typography variant="h6" component="h2">
+                                    Name : {selectedProduct.productName}
+                                </Typography>
+                            </Grid>
+                            <Grid item xs={6}>
+                                <Typography variant="h6" component="h2">
+                                    Description : {selectedProduct.description}
+                                </Typography>
+                            </Grid>
+                            <Grid item xs={6}>
+                                <Typography variant="h6" component="h2">
+                                    Price : {selectedProduct.price}
+                                </Typography>
+                            </Grid>
+                            <Grid item xs={6}>
+                                <Typography variant="h6" component="h2">
+                                    Quantity : {selectedProduct.quantity}
+                                </Typography>
+                            </Grid>
+                        </Grid>
+                    </>}
                     <div style={{
                         display: 'flex',
                         justifyContent: 'space-around',
                         marginTop: 10
                     }}>
+                        {selectedAction !== 'view' &&
                         <Button
                             label={selectedAction}
                             variant={'outlined'}
                             color={'secondary'}
                             size={'small'}
                             onClick={submitHandler}
-                        />
+                        />}
                         <Button
                             label={"Cancel"}
                             variant={'outlined'}

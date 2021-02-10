@@ -24,7 +24,7 @@ const LandingPage: FC = (props: any) => {
                     size="large"
                     startIcon={<NoteAddIcon />}
                     label={"Add Products"}
-                    onClick={() => props.history.push('/create')}
+                    onClick={() => props.history.push('/list/new')}
                     align={'center'}
                 />
             </Card>

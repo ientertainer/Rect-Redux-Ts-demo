@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React from 'react'
 import { Button as Btn } from "@material-ui/core";
 import './ButtonStyle.css'
 
